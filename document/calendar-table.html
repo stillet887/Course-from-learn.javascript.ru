@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .months {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .month td {
+            padding: 0 5px;
+            text-align: center;
+        }
+        .month__name {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="months">
+    <div class="month">
+        <h3 class="month__name">Июнь 2018</h3>
+        <div class="month__calendar" id="june-2018"></div>
+    </div>
+    <div class="month">
+        <h3 class="month__name">Июль 2018</h3>
+        <div class="month__calendar" id="july-2018"></div>
+    </div>
+    <div class="month">
+        <h3 class="month__name">Август 2018</h3>
+        <div class="month__calendar" id="august-2018"></div>
+    </div>
+</div>
+
+<script>
+    // https://learn.javascript.ru/task/calendar-table
+
+    function createCalendar(id, year, month) {
+        const calendarContainer = document.getElementById(id);
+
+        const table =  document.createElement('table');
+        const headRow = document.createElement('tr');
+        const daysOfWeek = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+
+        daysOfWeek.forEach(dayOfWeek => {
+            const headCell = document.createElement('th');
+            headCell.innerText = dayOfWeek;
+            headRow.appendChild(headCell);
+        });
+
+        table.appendChild(headRow);
+
+        const countDays = new Date(year, month + 1, 0).getDate();
+
+        const firstDay = new Date(year, month, 1).getDay() || 7;
+        let countOfEmptyCellsInBegin = firstDay - 1;
+
+        const lastDay = new Date(year, month, countDays).getDay();
+        const countOfEmptyCellsInEnd = 7 - lastDay;
+
+        const countOfCells = countDays + countOfEmptyCellsInBegin + countOfEmptyCellsInEnd;
+        const countOfRows = countOfCells / 7;
+
+        let day = 1;
+
+        for (let rowNumber = 1; rowNumber <= countOfRows; rowNumber++) {
+            const row = document.createElement('tr');
+
+            for(let cellNumber = 1; cellNumber <= 7; cellNumber++) {
+                const cell = document.createElement('td');
+                if (!countOfEmptyCellsInBegin && day <= countDays) {
+                    cell.innerText = day.toString();
+                    day++;
+                } else if (countOfEmptyCellsInBegin) {
+                    countOfEmptyCellsInBegin--;
+                }
+                row.appendChild(cell);
+            }
+
+            table.appendChild(row);
+        }
+
+        calendarContainer.appendChild(table);
+    }
+
+    createCalendar('june-2018', 2018, 5);
+    createCalendar('july-2018', 2018, 6);
+    createCalendar('august-2018', 2018, 7);
+</script>
+
+</body>
+</html>

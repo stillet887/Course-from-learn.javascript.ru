@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #field {
+            width: 200px;
+            height: 150px;
+            border: 10px groove black;
+            background-color: #00FF00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #ball {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -20px;
+            margin-top: -20px;
+        }
+    </style>
+</head>
+
+<body style="height:2000px">
+
+Кликните на любое место поля, чтобы мяч перелетел туда.
+<br> Мяч никогда не вылетит за границы поля.
+
+
+<div id="field">
+    <img src="https://js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+</div>
+
+<script>
+    // https://learn.javascript.ru/task/move-ball-field
+
+    const ball = document.getElementById('ball');
+    const field = document.getElementById('field');
+
+    const ballSize = parseInt(getComputedStyle(ball).width);
+    const fieldCss = getComputedStyle(field);
+    const fieldWidth = parseInt(fieldCss.width);
+    const fieldHeight = parseInt(fieldCss.height)
+
+    const minX  = ballSize / 2;
+    const maxX  = fieldWidth - ballSize / 2;
+    const minY  = ballSize / 2;
+    const maxY  = fieldHeight - ballSize / 2;
+
+    field.addEventListener('click', ev => {
+        let x = ev.offsetX;
+        let y = ev.offsetY;
+
+        if(ev.target === ball) {
+            if(x > ballSize / 2) {
+                x = parseInt(getComputedStyle(ball).left) + (x - ballSize / 2);
+                console.log('+ x: ', (x - ballSize / 2))
+            } else {
+                x = parseInt(getComputedStyle(ball).left) - (ballSize / 2 - x)
+                console.log('- x: ', (ballSize / 2 - x))
+            }
+
+            if(y > ballSize / 2) {
+                y = parseInt(getComputedStyle(ball).top) + (y - ballSize / 2);
+            } else {
+                y = parseInt(getComputedStyle(ball).top) - (ballSize / 2 - y);
+            }
+        }
+
+        if (x < minX) {
+            x = minX;
+        }
+        if (x > maxX) {
+            x = maxX;
+        }
+        if (y < minY) {
+            y = minY;
+        }
+        if (y > maxY) {
+            y = maxY;
+        }
+
+        ball.style.top = y + 'px';
+        ball.style.left = x + 'px';
+    });
+</script>
+</body>
+</html>

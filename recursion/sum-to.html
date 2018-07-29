@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    // http://learn.javascript.ru/task/sum-to
+
+    function sumTo1(number) {
+        let sum = 0;
+        for(let i = 1; i <= number; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+
+    function sumTo2(number) {
+        if (number > 1) {
+            return number + sumTo3(number - 1);
+        }
+        return 1;
+    }
+
+    function sumTo3(number) {
+        const sum = (1 + number) * number / 2;
+        return sum;
+    }
+
+    console.log('1. Checking work through the cycle');
+    console.log('sumTo1(1) = ', sumTo1(1));
+    console.log('sumTo1(5) = ', sumTo1(5));
+    console.log('sumTo1(8) = ', sumTo1(8));
+    console.log('sumTo1(31) = ', sumTo1(31));
+    console.log('sumTo1(100) = ', sumTo1(100));
+
+    console.log('\n\n2. Checking work through the recursion');
+    console.log('sumTo2(1) = ', sumTo2(1));
+    console.log('sumTo2(5) = ', sumTo2(5));
+    console.log('sumTo2(8) = ', sumTo2(8));
+    console.log('sumTo2(31) = ', sumTo2(31));
+    console.log('sumTo2(100) = ', sumTo2(100));
+
+    console.log('\n\n3. Checking work through the formula');
+    console.log('sumTo3(1) = ', sumTo3(1));
+    console.log('sumTo3(5) = ', sumTo3(5));
+    console.log('sumTo3(8) = ', sumTo3(8));
+    console.log('sumTo3(31) = ', sumTo3(31));
+    console.log('sumTo3(100) = ', sumTo3(100));
+</script>
+</body>
+</html>

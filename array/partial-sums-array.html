@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // http://learn.javascript.ru/task/partial-sums-array
+
+    function getSums(arr) {
+        const sums = [];
+
+        arr.reduce((lastSum, item, index) => {
+            sums[index] = lastSum + item;
+            return sums[index];
+        }, 0);
+
+        return sums;
+    }
+
+    const arr1 = [ 1, 2, 3, 4, 5 ];
+    console.log('arr1 = ', arr1);
+    console.log('getSums(arr1)', getSums(arr1));
+
+    const arr2 = [-2,-1,0,1];
+    console.log('arr2 = ', arr2);
+    console.log('getSums(arr2)', getSums(arr2));
+</script>
+
+</body>
+</html>

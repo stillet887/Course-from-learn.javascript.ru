@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://learn.javascript.ru/test/libs.js"></script>
+</head>
+<body>
+<script>
+    // http://learn.javascript.ru/task/closure-sum
+
+    function sum(a) {
+        return function(b) {
+            return a + b;
+        }
+    }
+
+    // Tests
+
+    it("sum(5)(3) = 8", function() {
+        assert.strictEqual(sum(5)(3), 8);
+    });
+
+    it("sum(3)(5) = 8", function() {
+        assert.strictEqual(sum(5)(3), 8);
+    });
+
+    it("sum(-15)(5) = -10", function() {
+        assert.strictEqual(sum(-15)(5), -10);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="container"></div>
+
+<script>
+    // https://learn.javascript.ru/task/create-object-tree
+
+    function createTree(container, data) {
+        if( Object.keys(data).length === 0) {
+            return;
+        }
+
+        const tree = document.createElement('ul');
+
+        for (let key in data) {
+            const branch = document.createElement('li');
+            branch.innerText = key;
+
+            if( Object.keys(data).length > 0) {
+                createTree(branch, data[key]);
+            }
+
+            tree.appendChild(branch);
+        }
+
+        container.appendChild(tree);
+    }
+    
+    const data = {
+        "Рыбы": {
+            "Форель": {},
+            "Щука": {}
+        },
+
+        "Деревья": {
+            "Хвойные": {
+                "Лиственница": {},
+                "Ель": {}
+            },
+            "Цветковые": {
+                "Берёза": {},
+                "Тополь": {}
+            }
+        }
+    };
+
+    const container = document.getElementById('container');
+    createTree(container, data);
+</script>
+</body>
+</html>

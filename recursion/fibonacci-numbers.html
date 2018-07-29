@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    // http://learn.javascript.ru/task/fibonacci-numbers
+
+    function fib(number) {
+        const lastMembers = [1, 1];
+        let remainingNumberOfMembers = number - 2;
+        let oldLastMember, newLastMember;
+        for (;remainingNumberOfMembers > 0; remainingNumberOfMembers--) {
+            oldLastMember = lastMembers[1];
+            newLastMember = lastMembers[0] + lastMembers[1];
+            lastMembers[0] = oldLastMember;
+            lastMembers[1] = newLastMember;
+        }
+        return newLastMember;
+    }
+
+    console.log('fib(3) = ', fib(3));
+    console.log('fib(7) = ', fib(7));
+    console.log('fib(77) = ', fib(77));
+</script>
+</body>
+</html>

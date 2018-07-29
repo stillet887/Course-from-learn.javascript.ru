@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .slider {
+            height: 130px;
+            width: 390px;
+            padding: 0 30px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider__button {
+            padding: 0;
+            background: #ddd;
+            border-radius: 15px;
+            border: 1px solid gray;
+            font-size: 24px;
+            line-height: 24px;
+            color: #444;
+            display: block;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slider__button._previos {
+            left: 0;
+        }
+
+        .slider__button._next {
+            right: 0;
+        }
+
+        .slider__button:focus {
+            outline: none;
+        }
+
+        .slider__button:hover {
+            background: #ccc;
+            cursor: pointer;
+        }
+
+        .slider__list {
+            height: 200px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+            overflow-x: scroll;
+            white-space: nowrap;
+        }
+
+        .slider__image {
+            width: 130px;
+            height: 130px;
+            display: block;
+        }
+
+        .slider__item {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+<div class="slider" id="slider1">
+    <button class="slider__button _previos">⇦</button>
+    <ul class="slider__list">
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/1.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/2.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/3.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/4.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/5.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/6.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/7.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/8.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/9.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/10.png">
+        </li>
+    </ul>
+    <button class="slider__button _next">⇨</button>
+</div>
+
+<div class="slider" id="slider2">
+    <button class="slider__button _previos">⇦</button>
+    <ul class="slider__list">
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/1.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/2.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/3.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/4.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/5.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/6.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/7.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/8.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/9.png">
+        </li>
+        <li class="slider__item">
+            <img class="slider__image"
+                 src="https://js.cx/carousel/10.png">
+        </li>
+    </ul>
+    <button class="slider__button _next">⇨</button>
+</div>
+
+<script>
+    const sliderParams1 = {
+        slider: '#slider1',
+        sliderList: '.slider__list',
+        sliderPreviosButton: '.slider__button._previos',
+        sliderNextButton: '.slider__button._next',
+        slideWidth: 130,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    };
+    initSlider(sliderParams1);
+
+    const sliderParams2 = {
+        slider: '#slider2',
+        sliderList: '.slider__list',
+        sliderPreviosButton: '.slider__button._previos',
+        sliderNextButton: '.slider__button._next',
+        slideWidth: 130,
+        slidesToShow: 2,
+        slidesToScroll: 1
+    };
+    initSlider(sliderParams2);
+
+    function initSlider(sliderParams) {
+        const slider = document.querySelector(sliderParams.slider);
+        const sliderList = slider.querySelector(sliderParams.sliderList);
+        const sliderPreviosButton = slider.querySelector(sliderParams.sliderPreviosButton);
+        const sliderNextButton = slider.querySelector(sliderParams.sliderNextButton);
+
+        slider.style.width = sliderParams.slideWidth * sliderParams.slidesToShow + 'px';
+
+        sliderPreviosButton.addEventListener('click', () => {
+            sliderList.scrollLeft -= sliderParams.slideWidth * sliderParams.slidesToScroll;
+        });
+
+        sliderNextButton.addEventListener('click', () => {
+            sliderList.scrollLeft += sliderParams.slideWidth * sliderParams.slidesToScroll;
+        });
+    }
+</script>
+</body>
+</html>

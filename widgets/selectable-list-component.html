@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            background: lawngreen;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>Кристофер Робин</li>
+    <li>Винни-Пух</li>
+    <li>Ослик Иа</li>
+    <li>Мудрая Сова</li>
+    <li>Кролик. Просто кролик</li>
+</ul>
+
+<button id="showSelectBtn">getSelected()</button>
+
+<script>
+    // https://learn.javascript.ru/task/selectable-list-component
+
+    const listSelect = new ListSelect({
+        elem: document.querySelector('ul')
+    });
+
+    function ListSelect(options) {
+        const list = options.elem;
+        let lastSelectedElement = null;
+
+
+        list.addEventListener('click', ev => {
+            const items = list.querySelectorAll('li');
+
+            if(!ev.ctrlKey && !ev.shiftKey){
+                items.forEach(item => {
+                    if (item === ev.target) {
+                        item.classList.add('active');
+                        lastSelectedElement = item;
+                    } else {
+                        item.classList.remove('active');
+                    }
+                })
+            } else if(ev.ctrlKey) {
+                ev.target.classList.toggle('active');
+                lastSelectedElement = ev.target;
+            } else {
+                const positionRelativeToPrevious = ev.target.compareDocumentPosition(lastSelectedElement);
+
+                if (positionRelativeToPrevious === 2) {
+                    for (let item = lastSelectedElement; item != ev.target; item = item.nextElementSibling) {
+                        item.classList.add('active');
+                    }
+                } else {
+                    for (let item = ev.target; item != lastSelectedElement; item = item.nextElementSibling) {
+                        item.classList.add('active');
+                    }
+                }
+
+                ev.target.classList.add('active');
+            }
+        });
+
+        this.getSelected = function() {
+            const selectedItems = [];
+            list.querySelectorAll('.active').forEach(item => {
+                selectedItems.push(item.innerText);
+            });
+
+            return selectedItems;
+        };
+    }
+
+    document.getElementById('showSelectBtn').addEventListener('click', () => {
+        const answer = listSelect.getSelected();
+        const answerStr = `${answer.length} items is selected : \n${answer.join('\n')}`;
+        alert(answerStr);
+    })
+</script>
+</body>
+</html>

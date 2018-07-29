@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://learn.javascript.ru/test/libs.js"></script>
+</head>
+<body>
+<script>
+    // http://learn.javascript.ru/task/stringbuffer
+
+    function makeBuffer() {
+        var bufferStr = '';
+
+        return function buffer(str='') {
+            var formattedStr = String(str);
+            if(!formattedStr) {
+                return bufferStr;
+            } else {
+                bufferStr += formattedStr;
+            }
+        }
+    }
+
+    var buffer = makeBuffer();
+
+    // Tests
+
+    var buffer;
+    beforeEach(function() {
+        buffer = makeBuffer();
+    });
+
+    it("возвращает пустую строку по умолчанию", function() {
+        assert.strictEqual(buffer(), "");
+    });
+
+    it("добавляет аргументы в буффер", function() {
+        buffer('Замыкания');
+        buffer(' Использовать');
+        buffer(' Нужно!');
+        assert.equal(buffer(), 'Замыкания Использовать Нужно!');
+    });
+
+    it("приводит всё к строке", function() {
+        buffer(null);
+        buffer(false);
+        assert.equal(buffer(), "nullfalse");
+    });
+</script>
+
+</body>
+</html>
